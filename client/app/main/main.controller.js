@@ -71,6 +71,10 @@ class MainController {
       var summary = {};
       _.forEach(games, function(game) {
         _.forEach(game.getScore(), function(scoreSummary) {
+          if (game.isDraw()) {
+            return;
+          }
+
           if (!summary[scoreSummary.name]) {
             summary[scoreSummary.name] = 0;
           }
