@@ -58,6 +58,10 @@ class MainController {
     });
   }
 
+  editGame(game) {
+    this.game = game;
+  }
+
   deleteGame(game) {
     game.remove().then(() => {
       this.refreshGames();

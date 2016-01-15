@@ -138,6 +138,10 @@
     }
 
     save() {
+      if (this.data._id) {
+        return $http.put('/api/games/' + this.data._id, this.data);
+      }
+
       return $http.post('/api/games', this.data)
     }
 

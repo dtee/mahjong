@@ -56,7 +56,7 @@ describe('Game API:', function() {
     });
 
     it('should respond with the newly created game', function() {
-      newGame.seats.should.equal(gameData.seats);
+      newGame.seats.east.should.equal(gameData.seats.east);
     });
 
   });
@@ -83,7 +83,7 @@ describe('Game API:', function() {
     });
 
     it('should respond with the requested game', function() {
-      game.seats.should.equal(gameData.seats);
+      game.seats.east.should.equal(gameData.seats.east);
     });
 
   });
@@ -91,13 +91,16 @@ describe('Game API:', function() {
   describe('PUT /api/games/:id', function() {
     var updatedGame;
 
+    gameData.actions = [{
+      actor: 'west',
+      actionType: 'eat',
+      from: 'east'
+    }];
+
     beforeEach(function(done) {
       request(app)
         .put('/api/games/' + newGame._id)
-        .send({
-          name: 'Updated Game',
-          info: 'This is the updated game!!!'
-        })
+        .send(gameData)
         .expect(200)
         .expect('Content-Type', /json/)
         .end(function(err, res) {
@@ -114,10 +117,12 @@ describe('Game API:', function() {
     });
 
     it('should respond with the updated game', function() {
-      updatedGame.name.should.equal('Updated Game');
-      updatedGame.info.should.equal('This is the updated game!!!');
+      newGame.seats.east.should.equal(gameData.seats.east);
     });
 
+    it('should respond with the updated game - one action', function() {
+      newGame.actions.length.should.equal(1);
+    });
   });
 
   describe('DELETE /api/games/:id', function() {
