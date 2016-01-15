@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('mahjongApp')
-  .directive('gameAction', function (_GameFactory_) {
+  .directive('gameAction', [GameFactory, function (GameFactory) {
     return {
       templateUrl: 'app/gameAction/gameAction.html',
       scope: {
@@ -14,7 +14,7 @@ angular.module('mahjongApp')
           return {id: name, name: name};
         });
 
-        scope.actionTypes = _.toArray(_GameFactory_.getActionTypes());
+        scope.actionTypes = _.toArray(GameFactory.getActionTypes());
 
         var updateFromPlayers = function() {
           scope.userPlayers = _.filter(players, function(player) {
@@ -27,7 +27,7 @@ angular.module('mahjongApp')
             return player.id !== scope.action.actor;
           });
 
-          if (scope.action.actionType !== _GameFactory_.enums.EAT) {
+          if (scope.action.actionType !== GameFactory.enums.EAT) {
             fromPlayers.unshift({id: 'all', name: 'All'})
           }
 
@@ -41,4 +41,4 @@ angular.module('mahjongApp')
         updateActors();
       }
     };
-  });
+  }]);
