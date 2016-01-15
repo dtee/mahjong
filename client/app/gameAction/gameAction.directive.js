@@ -10,8 +10,8 @@ angular.module('mahjongApp')
       },
       restrict: 'EA',
       link: function (scope) {
-        var players = _.map(scope.game.data.seats, function(name) {
-          return {id: name, name: name};
+        var players = _.map(scope.game.data.seats, function(name, seat) {
+          return {id: seat, name: name};
         });
 
         scope.userPlayers = [];

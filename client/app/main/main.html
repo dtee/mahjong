@@ -22,7 +22,9 @@
                 <span ng-class="{won:player.won}">{{player.name}}: {{ player.score }}</span>
             </td>
             <td>
-              <button type="button" class="close" ng-click="main.deleteGame(game)">&times;</button>
+              <button type="button" class="close"
+                      ng-bootbox-confirm="Are you sure you want to delete this?"
+                      ng-bootbox-confirm-action="main.deleteGame(game)">&times;</button>
             </td>
           </tr>
         </tbody>
@@ -53,12 +55,12 @@
 
     <div data-ng-repeat="action in main.game.data.actions" class="clearfix">
       <span>
-        <span>{{action.actor}}</span>
+        <span>{{action.actorPlayer()}}</span>
         <span>{{action.actionType}}</span>
         <span data-ng-if="action.isOrphan"> 13 Orphan hand </span>
         <span ng-if="action.bonus"> with {{action.bonus}} bonus(es)</span>
         from
-        <span>{{action.from}}</span>
+        <span>{{action.fromPlayer()}}</span>
       </span>
 
       <div class="pull-right">

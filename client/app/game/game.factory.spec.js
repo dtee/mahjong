@@ -6,25 +6,44 @@ describe('Model: Game', function() {
   beforeEach(module('mahjongApp'));
 
   var scope, GameFactory,
-    david = 'david', jeff = 'jeff', amy = 'amy', julia = 'julia', all = 'all';
+    david = 'david', jeff = 'jeff', amy = 'amy', julia = 'julia', all = 'all',
+    seats = {
+      west: david,
+      east: julia,
+      south: amy,
+      north: jeff
+    }, game;
+
+  var seatsReverse = {};
+  _.forEach(seats, function(value, key) {
+    seatsReverse[value] = key;
+  });
+
+  var createAction = function(action, game) {
+    action.actor = seatsReverse[action.actor];
+    action.from = seatsReverse[action.from] || action.from;
+    game.addAction(game.createAction(action));
+  }
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function($rootScope, $state, _GameFactory_) {
     scope = $rootScope.$new();
     GameFactory = _GameFactory_;
+    game = GameFactory.create({seats: seats});
   }));
 
   it('should calculate draw', function() {
-    var game = GameFactory.create();
-    game.addAction({actor: david, actionType: GameFactory.enums.BIRD, from: all});
+    var game = GameFactory.create({seats: seats});
+
+    createAction({actor: david, actionType: GameFactory.enums.BIRD, from: all}, game);
     expect(game.isDraw()).toBe(true);
   });
 
   describe('calculate single eat', function() {
     var game = null;
     beforeEach(function() {
-      game = GameFactory.create();
-      game.addAction({actor: david, actionType: GameFactory.enums.EAT, from: julia});
+      game = GameFactory.create({seats: seats});
+      createAction({actor: david, actionType: GameFactory.enums.EAT, from: julia}, game);
     });
 
     it('should expect draw to be false', function() {
@@ -52,8 +71,8 @@ describe('Model: Game', function() {
   describe('calculate single eat 13 orphan', function() {
     var game = null;
     beforeEach(function() {
-      game = GameFactory.create();
-      game.addAction({actor: david, actionType: GameFactory.enums.EAT, from: julia, isOrphan: true});
+      game = GameFactory.create({seats: seats});
+      createAction({actor: david, actionType: GameFactory.enums.EAT, from: julia, isOrphan: true}, game);
     });
 
     it('should expect draw to be false', function() {
@@ -81,9 +100,9 @@ describe('Model: Game', function() {
   describe('calculate single eat with bird', function() {
     var game = null;
     beforeEach(function() {
-      game = GameFactory.create();
-      game.addAction({actor: david, actionType: GameFactory.enums.BIRD, from: all});
-      game.addAction({actor: david, actionType: GameFactory.enums.EAT, from: julia});
+      game = GameFactory.create({seats: seats});
+      createAction({actor: david, actionType: GameFactory.enums.BIRD, from: all}, game);
+      createAction({actor: david, actionType: GameFactory.enums.EAT, from: julia}, game);
     });
 
     it('should expect draw to be false', function() {
@@ -105,10 +124,10 @@ describe('Model: Game', function() {
   describe('calculate single eat with gong, then bird', function() {
     var game = null;
     beforeEach(function() {
-      game = GameFactory.create();
-      game.addAction({actor: david, actionType: GameFactory.enums.GONG, from: julia});
-      game.addAction({actor: david, actionType: GameFactory.enums.BIRD, from: julia});
-      game.addAction({actor: david, actionType: GameFactory.enums.EAT, from: julia});
+      game = GameFactory.create({seats: seats});
+      createAction({actor: david, actionType: GameFactory.enums.GONG, from: julia}, game);
+      createAction({actor: david, actionType: GameFactory.enums.BIRD, from: julia}, game);
+      createAction({actor: david, actionType: GameFactory.enums.EAT, from: julia}, game);
     });
 
     it('should expect draw to be false', function() {
@@ -131,10 +150,10 @@ describe('Model: Game', function() {
   describe('calculate multi-winner eat with bird', function() {
     var game = null;
     beforeEach(function() {
-      game = GameFactory.create();
-      game.addAction({actor: david, actionType: GameFactory.enums.BIRD, from: all});
-      game.addAction({actor: david, actionType: GameFactory.enums.EAT, from: julia});
-      game.addAction({actor: amy, actionType: GameFactory.enums.EAT, from: julia});
+      game = GameFactory.create({seats: seats});
+      createAction({actor: david, actionType: GameFactory.enums.BIRD, from: all}, game);
+      createAction({actor: david, actionType: GameFactory.enums.EAT, from: julia}, game);
+      createAction({actor: amy, actionType: GameFactory.enums.EAT, from: julia}, game);
     });
 
     it('should expect draw to be false', function() {
@@ -163,8 +182,8 @@ describe('Model: Game', function() {
   describe('should calculate single self-draw', function() {
     var game = null;
     beforeEach(function() {
-      game = GameFactory.create();
-      game.addAction({actor: david, actionType: GameFactory.enums.SELF_DRAW, from: all});
+      game = GameFactory.create({seats: seats});
+      createAction({actor: david, actionType: GameFactory.enums.SELF_DRAW, from: all}, game);
     });
 
     it('should expect draw to be false', function() {
@@ -187,8 +206,8 @@ describe('Model: Game', function() {
   describe('should calculate single self-draw - orphan', function() {
     var game = null;
     beforeEach(function() {
-      game = GameFactory.create();
-      game.addAction({actor: david, actionType: GameFactory.enums.SELF_DRAW, from: all, isOrphan: true});
+      game = GameFactory.create({seats: seats});
+      createAction({actor: david, actionType: GameFactory.enums.SELF_DRAW, from: all, isOrphan: true}, game);
     });
 
     it('should expect draw to be false', function() {
@@ -211,8 +230,8 @@ describe('Model: Game', function() {
   describe('should calculate single self-draw with bonus', function() {
     var game = null;
     beforeEach(function() {
-      game = GameFactory.create();
-      game.addAction({actor: david, actionType: GameFactory.enums.SELF_DRAW, from: all, bonus: 1});
+      game = GameFactory.create({seats: seats});
+      createAction({actor: david, actionType: GameFactory.enums.SELF_DRAW, from: all, bonus: 1}, game);
     });
 
     it('should expect draw to be false', function() {
@@ -234,8 +253,8 @@ describe('Model: Game', function() {
   describe('should calculate single self-draw with bonus from a player', function() {
     var game = null;
     beforeEach(function() {
-      game = GameFactory.create();
-      game.addAction({actor: david, actionType: GameFactory.enums.SELF_DRAW, from: julia, bonus: 1});
+      game = GameFactory.create({seats: seats});
+      createAction({actor: david, actionType: GameFactory.enums.SELF_DRAW, from: julia, bonus: 1}, game);
     });
 
     it('should expect draw to be false', function() {
@@ -257,10 +276,10 @@ describe('Model: Game', function() {
   describe('should calculate gong, bird selfdraw from back', function() {
     var game = null;
     beforeEach(function() {
-      game = GameFactory.create();
-      game.addAction({actor: david, actionType: GameFactory.enums.GONG, from: julia});
-      game.addAction({actor: david, actionType: GameFactory.enums.BIRD, from: julia});
-      game.addAction({actor: david, actionType: GameFactory.enums.SELF_DRAW, from: julia, bonus: 2});
+      game = GameFactory.create({seats: seats});
+      createAction({actor: david, actionType: GameFactory.enums.GONG, from: julia}, game);
+      createAction({actor: david, actionType: GameFactory.enums.BIRD, from: julia}, game);
+      createAction({actor: david, actionType: GameFactory.enums.SELF_DRAW, from: julia, bonus: 2}, game);
     });
 
     it('should expect draw to be false', function() {

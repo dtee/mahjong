@@ -51,9 +51,14 @@
   class Game {
     constructor(data) {
       // Use the User $resource to fetch all users
-      this.data = _.merge({}, data || {}, _default);
+      this.data = _.merge({}, _default, data || {});
+
       this.data.created = this.data.created || new Date();
       this.data.updated = this.data.updated || new Date();
+
+      this.data.actions = _.map(this.data.actions, (action) => {
+        return this.createAction(action);
+      });
     }
 
     addAction(action) {
@@ -68,7 +73,7 @@
       var winners = [];
       _.forEach(this.data.actions, function(action) {
         if (action.actionType === enums.EAT || action.actionType === enums.SELF_DRAW) {
-          winners.push(action.actor);
+          winners.push(action.actorPlayer());
         }
       });
 
@@ -104,7 +109,7 @@
       });
 
       _.forEach(this.data.actions, function(action) {
-        if (action.actor === player) {
+        if (action.actorPlayer() === player) {
           var wonValue = getValue(action);
 
           if (action.from === 'all') {
@@ -114,18 +119,18 @@
             });
           }
           else {
-            others[action.from] += wonValue;
+            others[action.fromPlayer()] += wonValue;
           }
         }
         else {
           // did not win - but did not lose
           var lostValue = getValue(action);
 
-          if (action.from !== 'all' && action.from !== player) {
+          if (action.from !== 'all' && action.fromPlayer() !== player) {
             lostValue = 0;    // No need to pay
           }
 
-          others[action.actor] -= lostValue;
+          others[action.actorPlayer()] -= lostValue;
         }
       });
 
@@ -135,7 +140,31 @@
     save() {
       return $http.post('/api/games', this.data)
     }
+
+    remove() {
+      return $http.delete('/api/games/' + this.data._id);
+    }
+
+    createAction (action) {
+      return new GameAction(action || {}, this);
+    }
   };
+
+  var GameAction = function(action, game) {
+    this.actor = action.actor || null;
+    this.actionType = action.actionType || null;
+    this.from = action.from || 'all';
+    this.bonus = action.bonus || 0;
+    this.isOrphan = action.isOrphan || false;
+
+    this.actorPlayer = function() {
+      return game.data.seats[this.actor];
+    }
+
+    this.fromPlayer = function() {
+      return game.data.seats[this.from] || this.from;
+    }
+  }
 
   angular.module('mahjongApp').factory('GameFactory', ['$http', '$q', 'socket', function (_$http_, $q) {
     $http = _$http_;
@@ -149,9 +178,6 @@
       },
       create: function create(data) {
         return new Game(data);
-      },
-      createAction: function () {
-        return {actor: null, actionType: null, from: 'all', bonus: 0, isOrphan: false};
       },
       loadGames: function () {
         var games = [];

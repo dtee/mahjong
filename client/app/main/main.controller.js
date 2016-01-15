@@ -18,9 +18,7 @@ class MainController {
 
     this.GameFactory = GameFactory;
     this.game = GameFactory.create();
-
-    var actionDefault = {actor: null, actionType: null, from: 'all'};
-    this.action = angular.copy(actionDefault);
+    this.action = this.game.createAction();
 
     this.refreshGames();
 
@@ -42,9 +40,9 @@ class MainController {
           label: "Save",
           className: "btn-success",
           callback: () => {
-            if (that.action.actor && that.action.actionType) {
+            if (that.action.actor && that.action.actionType && that.action.from) {
               that.game.addAction(that.action);
-              that.action = angular.copy(actionDefault);
+              that.action = that.game.createAction();
               $scope.$apply();
             }
           }
@@ -53,13 +51,16 @@ class MainController {
     };
   }
 
-  addAction() {
-  }
-
   save(game) {
     game.save().then(() => {
       this.refreshGames();
       this.game = this.GameFactory.create();
+    });
+  }
+
+  deleteGame(game) {
+    game.remove().then(() => {
+      this.refreshGames();
     });
   }
 
