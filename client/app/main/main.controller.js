@@ -4,29 +4,66 @@
 
 class MainController {
 
-  constructor($http, $scope, socket) {
+  constructor($http, $scope, socket, _GameFactory_) {
     this.$http = $http;
-    this.awesomeThings = [];
+    this.games = [];
+    this.seats = [
+      'west',
+      'east',
+      'north',
+      'south'
+    ];
 
-    $http.get('/api/things').then(response => {
-      this.awesomeThings = response.data;
-      socket.syncUpdates('thing', this.awesomeThings);
+    this.GameFactory = _GameFactory_;
+    this.game = _GameFactory_.create();
+
+    var actionDefault = {actor: null, actionType: null, from: 'all'};
+    this.action = angular.copy(actionDefault);
+
+    _GameFactory_.loadGames().then((games) => {
+      this.games = games;
+      socket.syncUpdates('games', games);
     });
 
     $scope.$on('$destroy', function() {
-      socket.unsyncUpdates('thing');
+      socket.unsyncUpdates('games');
     });
+
+    var that = this;
+    this.customDialogOptions = {
+      scope: $scope,
+      title: 'Add an action!',
+      message: 'Item',
+      templateUrl: '/app/main/add-dialog.html',
+      buttons: {
+        cancel: {
+          label: "Cancel"
+        },
+        success: {
+          label: "Save",
+          className: "btn-success",
+          callback: () => {
+            if (that.action.actor && that.action.actionType) {
+              that.game.addAction(that.action);
+              that.action = angular.copy(actionDefault);
+              $scope.$apply();
+            }
+          }
+        }
+      }
+    };
   }
 
-  addThing() {
-    if (this.newThing) {
-      this.$http.post('/api/things', { name: this.newThing });
-      this.newThing = '';
-    }
+  addAction() {
   }
 
-  deleteThing(thing) {
-    this.$http.delete('/api/things/' + thing._id);
+  save(game) {
+    console.log('saving ', game);
+    game.save();
+  }
+
+  removeAction(action) {
+    _.remove(this.game.data.actions, action);
   }
 }
 

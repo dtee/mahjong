@@ -10,7 +10,8 @@ angular.module('mahjongApp', [
   'btford.socket-io',
   'ui.router',
   'ui.bootstrap',
-  'validation.match'
+  'validation.match',
+  'ngBootbox'
 ])
   .config(function($urlRouterProvider, $locationProvider) {
     $urlRouterProvider

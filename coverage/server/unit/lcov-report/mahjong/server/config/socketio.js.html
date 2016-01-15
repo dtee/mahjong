@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for mahjong/server/config/socketio.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">all files</a> / <a href="index.html">mahjong/server/config/</a> socketio.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">40% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>10/25</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>4/4</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">25% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>2/8</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">37.5% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>9/24</span>
+      </div>
+      <div class='fl pad1y'>
+        <span class="strong">1 branch</span>
+        <span class="quiet">Ignored</span>  &nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+ * Socket.io configuration
+ */
+'use strict';
+&nbsp;
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+// istanbul ignore next
+&nbsp;
+function _interopRequireDefault(obj) { return obj &amp;&amp; obj.__esModule ? <span class="branch-0 cbranch-skip" title="branch not covered" >obj </span>: { 'default': obj }; }
+&nbsp;
+var _environment = require('./environment');
+&nbsp;
+var _environment2 = _interopRequireDefault(_environment);
+&nbsp;
+// When the user disconnects.. perform this
+<span class="fstat-no" title="function not covered" >function onDisconnect(socket) {</span>}
+&nbsp;
+// When the user connects.. perform this
+<span class="fstat-no" title="function not covered" >function onConnect(socket) {</span>
+  // When the client emits 'info', this listens and executes
+<span class="cstat-no" title="statement not covered" >  socket.on('info', <span class="fstat-no" title="function not covered" >function (data) {</span></span>
+<span class="cstat-no" title="statement not covered" >    socket.log(JSON.stringify(data, null, 2));</span>
+  });
+&nbsp;
+  // Insert sockets below
+<span class="cstat-no" title="statement not covered" >  require('../api/game/game.socket').register(socket);</span>
+<span class="cstat-no" title="statement not covered" >  require('../api/thing/thing.socket').register(socket);</span>
+}
+&nbsp;
+exports['default'] = function (socketio) {
+  // socket.io (v1.x.x) is powered by debug.
+  // In order to see all the debug output, set DEBUG (in server/config/local.env.js) to including the desired scope.
+  //
+  // ex: DEBUG: "http*,socket.io:socket"
+&nbsp;
+  // We can authenticate socket.io users and access their token through socket.decoded_token
+  //
+  // 1. You will need to send the token in `client/components/socket/socket.service.js`
+  //
+  // 2. Require authentication here:
+  // socketio.use(require('socketio-jwt').authorize({
+  //   secret: config.secrets.session,
+  //   handshake: true
+  // }));
+&nbsp;
+  socketio.on('connection', <span class="fstat-no" title="function not covered" >function (socket) {</span>
+<span class="cstat-no" title="statement not covered" >    socket.address = socket.request.connection.remoteAddress + ':' + socket.request.connection.remotePort;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    socket.connectedAt = new Date();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    socket.log = <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >      for (var _len = arguments.length, data = Array(_len), _key = 0; _key &lt; _len; _key++) {</span>
+<span class="cstat-no" title="statement not covered" >        data[_key] = arguments[_key];</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      console.log.apply(console, ['SocketIO ' + socket.nsp.name + ' [' + socket.address + ']'].concat(data));</span>
+    };
+&nbsp;
+    // Call onDisconnect.
+<span class="cstat-no" title="statement not covered" >    socket.on('disconnect', <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >      onDisconnect(socket);</span>
+<span class="cstat-no" title="statement not covered" >      socket.log('DISCONNECTED');</span>
+    });
+&nbsp;
+    // Call onConnect.
+<span class="cstat-no" title="statement not covered" >    onConnect(socket);</span>
+<span class="cstat-no" title="statement not covered" >    socket.log('CONNECTED');</span>
+  });
+};
+&nbsp;
+module.exports = exports['default'];
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9kdGVlL2dpdC9tYWhqb25nL3NlcnZlci9jb25maWcvc29ja2V0aW8uanMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7O0FBR0EsWUFBWSxDQUFDOzs7Ozs7Ozs7MkJBRU0sZUFBZTs7Ozs7QUFHbEMsU0FBUyxZQUFZLENBQUMsTUFBTSxFQUFFLEVBQzdCOzs7QUFHRCxTQUFTLFNBQVMsQ0FBQyxNQUFNLEVBQUU7O0FBRXpCLFFBQU0sQ0FBQyxFQUFFLENBQUMsTUFBTSxFQUFFLFVBQUEsSUFBSSxFQUFJO0FBQ3hCLFVBQU0sQ0FBQyxHQUFHLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxJQUFJLEVBQUUsSUFBSSxFQUFFLENBQUMsQ0FBQyxDQUFDLENBQUM7R0FDM0MsQ0FBQyxDQUFDOzs7QUFHSCxTQUFPLENBQUMseUJBQXlCLENBQUMsQ0FBQyxRQUFRLENBQUMsTUFBTSxDQUFDLENBQUM7QUFDcEQsU0FBTyxDQUFDLDJCQUEyQixDQUFDLENBQUMsUUFBUSxDQUFDLE1BQU0sQ0FBQyxDQUFDO0NBRXZEOztxQkFFYyxVQUFTLFFBQVEsRUFBRTs7Ozs7Ozs7Ozs7Ozs7OztBQWdCaEMsVUFBUSxDQUFDLEVBQUUsQ0FBQyxZQUFZLEVBQUUsVUFBUyxNQUFNLEVBQUU7QUFDekMsVUFBTSxDQUFDLE9BQU8sR0FBRyxNQUFNLENBQUMsT0FBTyxDQUFDLFVBQVUsQ0FBQyxhQUFhLEdBQ3RELEdBQUcsR0FBRyxNQUFNLENBQUMsT0FBTyxDQUFDLFVBQVUsQ0FBQyxVQUFVLENBQUM7O0FBRTdDLFVBQU0sQ0FBQyxXQUFXLEdBQUcsSUFBSSxJQUFJLEVBQUUsQ0FBQzs7QUFFaEMsVUFBTSxDQUFDLEdBQUcsR0FBRyxZQUFrQjt3Q0FBTixJQUFJO0FBQUosWUFBSTs7O0FBQzNCLGFBQU8sQ0FBQyxHQUFHLE1BQUEsQ0FBWCxPQUFPLGlCQUFpQixNQUFNLENBQUMsR0FBRyxDQUFDLElBQUksVUFBSyxNQUFNLENBQUMsT0FBTyxlQUFRLElBQUksRUFBQyxDQUFDO0tBQ3pFLENBQUM7OztBQUdGLFVBQU0sQ0FBQyxFQUFFLENBQUMsWUFBWSxFQUFFLFlBQU07QUFDNUIsa0JBQVksQ0FBQyxNQUFNLENBQUMsQ0FBQztBQUNyQixZQUFNLENBQUMsR0FBRyxDQUFDLGNBQWMsQ0FBQyxDQUFDO0tBQzVCLENBQUMsQ0FBQzs7O0FBR0gsYUFBUyxDQUFDLE1BQU0sQ0FBQyxDQUFDO0FBQ2xCLFVBQU0sQ0FBQyxHQUFHLENBQUMsV0FBVyxDQUFDLENBQUM7R0FDekIsQ0FBQyxDQUFDO0NBQ0oiLCJmaWxlIjoiL1VzZXJzL2R0ZWUvZ2l0L21haGpvbmcvc2VydmVyL2NvbmZpZy9zb2NrZXRpby5qcyIsInNvdXJjZXNDb250ZW50IjpbIi8qKlxuICogU29ja2V0LmlvIGNvbmZpZ3VyYXRpb25cbiAqL1xuJ3VzZSBzdHJpY3QnO1xuXG5pbXBvcnQgY29uZmlnIGZyb20gJy4vZW52aXJvbm1lbnQnO1xuXG4vLyBXaGVuIHRoZSB1c2VyIGRpc2Nvbm5lY3RzLi4gcGVyZm9ybSB0aGlzXG5mdW5jdGlvbiBvbkRpc2Nvbm5lY3Qoc29ja2V0KSB7XG59XG5cbi8vIFdoZW4gdGhlIHVzZXIgY29ubmVjdHMuLiBwZXJmb3JtIHRoaXNcbmZ1bmN0aW9uIG9uQ29ubmVjdChzb2NrZXQpIHtcbiAgLy8gV2hlbiB0aGUgY2xpZW50IGVtaXRzICdpbmZvJywgdGhpcyBsaXN0ZW5zIGFuZCBleGVjdXRlc1xuICBzb2NrZXQub24oJ2luZm8nLCBkYXRhID0+IHtcbiAgICBzb2NrZXQubG9nKEpTT04uc3RyaW5naWZ5KGRhdGEsIG51bGwsIDIpKTtcbiAgfSk7XG5cbiAgLy8gSW5zZXJ0IHNvY2tldHMgYmVsb3dcbiAgcmVxdWlyZSgnLi4vYXBpL2dhbWUvZ2FtZS5zb2NrZXQnKS5yZWdpc3Rlcihzb2NrZXQpO1xuICByZXF1aXJlKCcuLi9hcGkvdGhpbmcvdGhpbmcuc29ja2V0JykucmVnaXN0ZXIoc29ja2V0KTtcblxufVxuXG5leHBvcnQgZGVmYXVsdCBmdW5jdGlvbihzb2NrZXRpbykge1xuICAvLyBzb2NrZXQuaW8gKHYxLngueCkgaXMgcG93ZXJlZCBieSBkZWJ1Zy5cbiAgLy8gSW4gb3JkZXIgdG8gc2VlIGFsbCB0aGUgZGVidWcgb3V0cHV0LCBzZXQgREVCVUcgKGluIHNlcnZlci9jb25maWcvbG9jYWwuZW52LmpzKSB0byBpbmNsdWRpbmcgdGhlIGRlc2lyZWQgc2NvcGUuXG4gIC8vXG4gIC8vIGV4OiBERUJVRzogXCJodHRwKixzb2NrZXQuaW86c29ja2V0XCJcblxuICAvLyBXZSBjYW4gYXV0aGVudGljYXRlIHNvY2tldC5pbyB1c2VycyBhbmQgYWNjZXNzIHRoZWlyIHRva2VuIHRocm91Z2ggc29ja2V0LmRlY29kZWRfdG9rZW5cbiAgLy9cbiAgLy8gMS4gWW91IHdpbGwgbmVlZCB0byBzZW5kIHRoZSB0b2tlbiBpbiBgY2xpZW50L2NvbXBvbmVudHMvc29ja2V0L3NvY2tldC5zZXJ2aWNlLmpzYFxuICAvL1xuICAvLyAyLiBSZXF1aXJlIGF1dGhlbnRpY2F0aW9uIGhlcmU6XG4gIC8vIHNvY2tldGlvLnVzZShyZXF1aXJlKCdzb2NrZXRpby1qd3QnKS5hdXRob3JpemUoe1xuICAvLyAgIHNlY3JldDogY29uZmlnLnNlY3JldHMuc2Vzc2lvbixcbiAgLy8gICBoYW5kc2hha2U6IHRydWVcbiAgLy8gfSkpO1xuXG4gIHNvY2tldGlvLm9uKCdjb25uZWN0aW9uJywgZnVuY3Rpb24oc29ja2V0KSB7XG4gICAgc29ja2V0LmFkZHJlc3MgPSBzb2NrZXQucmVxdWVzdC5jb25uZWN0aW9uLnJlbW90ZUFkZHJlc3MgK1xuICAgICAgJzonICsgc29ja2V0LnJlcXVlc3QuY29ubmVjdGlvbi5yZW1vdGVQb3J0O1xuXG4gICAgc29ja2V0LmNvbm5lY3RlZEF0ID0gbmV3IERhdGUoKTtcblxuICAgIHNvY2tldC5sb2cgPSBmdW5jdGlvbiguLi5kYXRhKSB7XG4gICAgICBjb25zb2xlLmxvZyhgU29ja2V0SU8gJHtzb2NrZXQubnNwLm5hbWV9IFske3NvY2tldC5hZGRyZXNzfV1gLCAuLi5kYXRhKTtcbiAgICB9O1xuXG4gICAgLy8gQ2FsbCBvbkRpc2Nvbm5lY3QuXG4gICAgc29ja2V0Lm9uKCdkaXNjb25uZWN0JywgKCkgPT4ge1xuICAgICAgb25EaXNjb25uZWN0KHNvY2tldCk7XG4gICAgICBzb2NrZXQubG9nKCdESVNDT05ORUNURUQnKTtcbiAgICB9KTtcblxuICAgIC8vIENhbGwgb25Db25uZWN0LlxuICAgIG9uQ29ubmVjdChzb2NrZXQpO1xuICAgIHNvY2tldC5sb2coJ0NPTk5FQ1RFRCcpO1xuICB9KTtcbn1cbiJdfQ==</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Jan 14 2016 22:05:29 GMT-0800 (PST)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

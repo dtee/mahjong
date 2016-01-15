@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for mahjong/server/components/errors/index.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../index.html">all files</a> / <a href="index.html">mahjong/server/components/errors/</a> index.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">11.11% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>1/9</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/2</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/2</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">11.11% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>1/9</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+ * Error responses
+ */
+&nbsp;
+'use strict';
+&nbsp;
+module.exports[404] = <span class="fstat-no" title="function not covered" >function pageNotFound(req, res) {</span>
+<span class="cstat-no" title="statement not covered" >  var viewFilePath = '404';</span>
+<span class="cstat-no" title="statement not covered" >  var statusCode = 404;</span>
+<span class="cstat-no" title="statement not covered" >  var result = {</span>
+    status: statusCode
+  };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  res.status(result.status);</span>
+<span class="cstat-no" title="statement not covered" >  res.render(viewFilePath, {}, <span class="fstat-no" title="function not covered" >function (err, html) {</span></span>
+<span class="cstat-no" title="statement not covered" >    if (err) {</span>
+<span class="cstat-no" title="statement not covered" >      return res.json(result, result.status);</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    res.send(html);</span>
+  });
+};
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9kdGVlL2dpdC9tYWhqb25nL3NlcnZlci9jb21wb25lbnRzL2Vycm9ycy9pbmRleC5qcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7O0FBSUEsWUFBWSxDQUFDOztBQUViLE1BQU0sQ0FBQyxPQUFPLENBQUMsR0FBRyxDQUFDLEdBQUcsU0FBUyxZQUFZLENBQUMsR0FBRyxFQUFFLEdBQUcsRUFBRTtBQUNwRCxNQUFJLFlBQVksR0FBRyxLQUFLLENBQUM7QUFDekIsTUFBSSxVQUFVLEdBQUcsR0FBRyxDQUFDO0FBQ3JCLE1BQUksTUFBTSxHQUFHO0FBQ1gsVUFBTSxFQUFFLFVBQVU7R0FDbkIsQ0FBQzs7QUFFRixLQUFHLENBQUMsTUFBTSxDQUFDLE1BQU0sQ0FBQyxNQUFNLENBQUMsQ0FBQztBQUMxQixLQUFHLENBQUMsTUFBTSxDQUFDLFlBQVksRUFBRSxFQUFFLEVBQUUsVUFBUyxHQUFHLEVBQUUsSUFBSSxFQUFFO0FBQy9DLFFBQUksR0FBRyxFQUFFO0FBQ1AsYUFBTyxHQUFHLENBQUMsSUFBSSxDQUFDLE1BQU0sRUFBRSxNQUFNLENBQUMsTUFBTSxDQUFDLENBQUM7S0FDeEM7O0FBRUQsT0FBRyxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQztHQUNoQixDQUFDLENBQUM7Q0FDSixDQUFDIiwiZmlsZSI6Ii9Vc2Vycy9kdGVlL2dpdC9tYWhqb25nL3NlcnZlci9jb21wb25lbnRzL2Vycm9ycy9pbmRleC5qcyIsInNvdXJjZXNDb250ZW50IjpbIi8qKlxuICogRXJyb3IgcmVzcG9uc2VzXG4gKi9cblxuJ3VzZSBzdHJpY3QnO1xuXG5tb2R1bGUuZXhwb3J0c1s0MDRdID0gZnVuY3Rpb24gcGFnZU5vdEZvdW5kKHJlcSwgcmVzKSB7XG4gIHZhciB2aWV3RmlsZVBhdGggPSAnNDA0JztcbiAgdmFyIHN0YXR1c0NvZGUgPSA0MDQ7XG4gIHZhciByZXN1bHQgPSB7XG4gICAgc3RhdHVzOiBzdGF0dXNDb2RlXG4gIH07XG5cbiAgcmVzLnN0YXR1cyhyZXN1bHQuc3RhdHVzKTtcbiAgcmVzLnJlbmRlcih2aWV3RmlsZVBhdGgsIHt9LCBmdW5jdGlvbihlcnIsIGh0bWwpIHtcbiAgICBpZiAoZXJyKSB7XG4gICAgICByZXR1cm4gcmVzLmpzb24ocmVzdWx0LCByZXN1bHQuc3RhdHVzKTtcbiAgICB9XG5cbiAgICByZXMuc2VuZChodG1sKTtcbiAgfSk7XG59O1xuIl19</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Jan 14 2016 22:05:29 GMT-0800 (PST)
+</div>
+</div>
+<script src="../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../sorter.js"></script>
+</body>
+</html>

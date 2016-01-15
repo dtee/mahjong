@@ -2,31 +2,79 @@
 
 <header class="hero-unit" id="banner">
   <div class="container">
-    <h1>'Allo, 'Allo!</h1>
-    <p class="lead">Kick-start your next web app with Angular Fullstack</p>
-    <img src="assets/images/yeoman.png" alt="I'm Yeoman">
+    <h2>Mahjong Score tracker</h2>
+    <p class="lead">
+      Track you winnings and losses. Over time, it will help you figure out the better player among you and what
+      strategy he/she maybe using.
+    </p>
   </div>
 </header>
 
 <div class="container">
-  <div class="row">
+  <div class="row" ng-if="main.games.length > 0">
     <div class="col-lg-12">
-      <h1 class="page-header">Features:</h1>
-      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in main.awesomeThings">
-        <li><a href="#" tooltip="{{thing.info}}">{{thing.name}}<button type="button" class="close" ng-click="main.deleteThing(thing)">&times;</button></a></li>
-      </ul>
+      <h2 class="page-header">Recent Games:</h2>
+      <table class="table table-bordered table-striped col-xs-12">
+        <tbody>
+          <tr ng-repeat="game in main.games" data-ng-init="scores = game.getScore()">
+            <td>{{game.data.created | date:'MM/dd h:mma'}}</td>
+            <td data-ng-repeat="player in scores">
+                {{player.name}}: {{ player.score }}
+            </td>
+            <td>
+              <button type="button" class="close" ng-click="main.deleteGame(game)">&times;</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 
-  <form class="thing-form">
-    <label>Syncs in realtime across clients</label>
-    <p class="input-group">
-      <input type="text" class="form-control" placeholder="Add a new thing here." ng-model="main.newThing">
-      <span class="input-group-btn">
-        <button type="submit" class="btn btn-primary" ng-click="main.addThing()">Add New</button>
+  <form class="thing-form form-horizontal">
+    <h1>Create a new Game</h1>
+    <div data-ng-repeat="seat in main.seats" class="form-group">
+      <label for="inputPassword3" class="col-xs-2 control-label">{{ seat }}</label>
+      <div class="col-xs-4">
+        <input type="text" class="form-control" id="inputPassword3"
+               placeholder="{{ seat }}" data-ng-model="main.game.data.seats[seat]">
+      </div>
+      <div class="col-xs-6">
+        {{ main.game.getTotalScoreForPlayer(main.game.data.seats[seat]) }}
+      </div>
+    </div>
+
+    <div data-ng-repeat="action in main.game.data.actions" class="clearfix">
+      <span>
+        <span>{{action.actor}}</span>
+        <span>{{action.actionType}}</span>
+        <span data-ng-if="action.isOrphan"> 13 Orphan hand </span>
+        <span ng-if="action.bonus"> with {{action.bonus}} bonus(es)</span>
+        from
+        <span>{{action.from}}</span>
       </span>
+
+      <div class="pull-right">
+        <button class="btn btn-success" ng-click="main.editAction(action)">
+          <span class="glyphicon glyphicon glyphicon-pencil"></span>
+        </button>
+
+        <button class="btn btn-danger" ng-click="main.removeAction(action)">
+          <span class="glyphicon glyphicon glyphicon-remove-circle"></span>
+        </button>
+      </div>
+    </div>
+
+    <p class="input-group">
+      <button class="btn btn-success" ng-click="main.save(main.game)">Save</button>
+
+      <button class="btn btn-primary"
+              ng-bootbox-custom-dialog
+              ng-bootbox-options="main.customDialogOptions">
+        Add Item
+      </button>
     </p>
   </form>
+
 </div>
 
 <footer></footer>

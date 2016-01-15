@@ -1,6 +1,7 @@
 # mahjong
 
-This project was generated with the [Angular Full-Stack Generator](https://github.com/DaftMonk/generator-angular-fullstack) version 3.1.1.
+This is a simple app to help keep track of hands in mahjong. You can figure out who the better in the group 
+is by keeping track of thousands of games and charting the stats.
 
 ## Getting Started
 

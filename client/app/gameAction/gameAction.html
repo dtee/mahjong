@@ -1,0 +1,52 @@
+<form name="gameForm" class="form-horizontal">
+  <div class="form-group"
+       data-ng-class="{'has-error': gameForm.actionType.$error.required}">
+    <label class="col-xs-3 control-label">User</label>
+    <div class="col-xs-9">
+      <select class="form-control" name="actionPlayer"
+              ng-model="action.actor" required>
+        <option ng-repeat="option in userPlayers" value="{{option.id}}">{{option.name}}</option>
+      </select>
+      <span class="help-block" ng-show="gameForm.actionType.$error.required">
+        Select Actor
+      </span>
+    </div>
+  </div>
+
+  <div class="form-group" data-ng-class="{'has-error': gameForm.actionType.$error.required}">
+    <label class="col-xs-3 control-label">Type</label>
+    <div class="col-xs-9">
+      <select class="form-control" name="actionType"
+              ng-model="action.actionType" required>
+        <option ng-repeat="option in actionTypes" value="{{option.id}}">{{option.name}}</option>
+      </select>
+      <span class="help-block" ng-show="gameForm.actionType.$error.required">
+        Select Type
+      </span>
+
+      <p>
+        <label><input type="checkbox" data-ng-model="action.isOrphan"/> Thirteen Orphan?</label>
+      </p>
+    </div>
+  </div>
+
+  <div class="form-group" data-ng-if="action.actionType === 'self-draw'">
+    <label class="col-xs-3 control-label">Bonus</label>
+    <div class="col-xs-9">
+      <select class="form-control" name="actionType"
+              ng-model="action.bonus" required>
+        <option ng-repeat="option in [0,1,2]" value="{{option}}">{{option}}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-xs-3 control-label">From</label>
+    <div class="col-xs-9">
+      <select class="form-control" name="fromPlayer"
+              ng-model="action.from">
+        <option ng-repeat="option in fromPlayers" value="{{option.id}}">{{option.name}}</option>
+      </select>
+    </div>
+  </div>
+</form>
