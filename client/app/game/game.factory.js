@@ -139,9 +139,11 @@
 
     save() {
       if (this.data._id) {
+        this.data.updated = new Date();
         return $http.put('/api/games/' + this.data._id, this.data);
       }
 
+      this.data.created = new Date();
       return $http.post('/api/games', this.data)
     }
 

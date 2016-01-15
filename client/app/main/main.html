@@ -78,15 +78,16 @@
       </div>
     </div>
 
-    <p class="input-group">
-      <button class="btn btn-success" ng-click="main.save(main.game)">Save</button>
+    <div>
+      <button class="btn btn-success" ng-click="main.save(main.game)"
+        data-ng-disabled="main.game.data.actions.length === 0">Save</button>
 
       <button class="btn btn-primary"
               ng-bootbox-custom-dialog
               ng-bootbox-options="main.customDialogOptions">
         Add Item
       </button>
-    </p>
+    </div>
   </form>
 
 </div>
