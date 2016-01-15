@@ -14,15 +14,18 @@ angular.module('mahjongApp')
           return {id: name, name: name};
         });
 
+        scope.userPlayers = [];
+        scope.fromPlayers = [];
         scope.actionTypes = _.toArray(GameFactory.getActionTypes());
 
-        var updateFromPlayers = function() {
+        var updateActors = function() {
           scope.userPlayers = _.filter(players, function(player) {
             return player.id !== scope.action.from;
           });
         };
 
-        var updateActors = function() {
+        var updateFromPlayers = function() {
+          console.log('exclude: ', scope.action.actor);
           var fromPlayers = _.filter(players, function(player) {
             return player.id !== scope.action.actor;
           });
@@ -31,11 +34,13 @@ angular.module('mahjongApp')
             fromPlayers.unshift({id: 'all', name: 'All'})
           }
 
+          console.log('fromPlayers', fromPlayers);
           scope.fromPlayers = fromPlayers;
         };
 
         scope.$watch(function() { return scope.action.from; }, updateActors);
         scope.$watch(function() { return scope.action.actor; }, updateFromPlayers);
+        scope.$watch(function() { return scope.action.actionType; }, updateFromPlayers);
 
         updateFromPlayers();
         updateActors();

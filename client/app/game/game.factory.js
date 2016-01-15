@@ -61,7 +61,7 @@
     }
 
     isDraw() {
-      return this.getWinners().length == 0;
+      return this.getWinners().length === 0;
     }
 
     getWinners() {
