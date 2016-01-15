@@ -52,8 +52,8 @@
     constructor(data) {
       // Use the User $resource to fetch all users
       this.data = _.merge({}, data || {}, _default);
-      this.data.created = new Date();
-      this.data.updated = new Date();
+      this.data.created = this.data.created || new Date();
+      this.data.updated = this.data.updated || new Date();
     }
 
     addAction(action) {
@@ -78,10 +78,12 @@
     // return a 2d array of who owes whom what
     getScore() {
       var summary = [];
+      var winners = this.getWinners();
       _.forEach(_.toArray(this.data.seats), (player) => {
         summary.push({
           name: player,
-          score: this.getTotalScoreForPlayer(player)
+          score: this.getTotalScoreForPlayer(player),
+          won: _.indexOf(winners, player) >= 0
         });
       });
 
@@ -135,9 +137,8 @@
     }
   };
 
-  angular.module('mahjongApp').factory('GameFactory', function (_$http_, $q, socket) {
+  angular.module('mahjongApp').factory('GameFactory', ['$http', '$q', 'socket', function (_$http_, $q) {
     $http = _$http_;
-    var games = [];
 
     var methods = {
       enums: enums,
@@ -153,6 +154,7 @@
         return {actor: null, actionType: null, from: 'all', bonus: 0, isOrphan: false};
       },
       loadGames: function () {
+        var games = [];
         var defer = $q.defer();
         $http.get('/api/games').then(response => {
           _.forEach(response.data, function (gameData) {
@@ -167,6 +169,6 @@
     };
 
     return methods;
-  });
+  }]);
 })();
 //# sourceMappingURL=game.factory.js.map

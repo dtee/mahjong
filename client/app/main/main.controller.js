@@ -4,9 +4,11 @@
 
 class MainController {
 
-  constructor($http, $scope, socket, _GameFactory_) {
+  constructor($http, $scope, socket, GameFactory) {
+    this.socket = socket;
     this.$http = $http;
     this.games = [];
+    this.summary = {};
     this.seats = [
       'west',
       'east',
@@ -14,16 +16,13 @@ class MainController {
       'south'
     ];
 
-    this.GameFactory = _GameFactory_;
-    this.game = _GameFactory_.create();
+    this.GameFactory = GameFactory;
+    this.game = GameFactory.create();
 
     var actionDefault = {actor: null, actionType: null, from: 'all'};
     this.action = angular.copy(actionDefault);
 
-    _GameFactory_.loadGames().then((games) => {
-      this.games = games;
-      socket.syncUpdates('games', games);
-    });
+    this.refreshGames();
 
     $scope.$on('$destroy', function() {
       socket.unsyncUpdates('games');
@@ -34,7 +33,7 @@ class MainController {
       scope: $scope,
       title: 'Add an action!',
       message: 'Item',
-      templateUrl: '/app/main/add-dialog.html',
+      templateUrl: 'app/main/add-dialog.html',
       buttons: {
         cancel: {
           label: "Cancel"
@@ -58,8 +57,31 @@ class MainController {
   }
 
   save(game) {
-    console.log('saving ', game);
-    game.save();
+    game.save().then(() => {
+      this.refreshGames();
+      this.game = this.GameFactory.create();
+    });
+  }
+
+  refreshGames() {
+    this.GameFactory.loadGames().then((games) => {
+      this.games = games;
+      this.socket.syncUpdates('games', games);
+
+      var summary = {};
+      _.forEach(games, function(game) {
+        _.forEach(game.getScore(), function(scoreSummary) {
+          if (!summary[scoreSummary.name]) {
+            summary[scoreSummary.name] = 0;
+          }
+
+          summary[scoreSummary.name] += scoreSummary.score;
+        });
+      });
+
+      console.log('summary', summary);
+      this.summary = summary;
+    });
   }
 
   removeAction(action) {
@@ -68,6 +90,6 @@ class MainController {
 }
 
 angular.module('mahjongApp')
-  .controller('MainController', MainController);
+  .controller('MainController', ['$http', '$scope', 'socket', 'GameFactory', MainController]);
 
 })();

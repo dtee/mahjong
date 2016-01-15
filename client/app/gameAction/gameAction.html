@@ -24,7 +24,7 @@
         Select Type
       </span>
 
-      <p>
+      <p data-ng-if="isWinningAction()">
         <label><input type="checkbox" data-ng-model="action.isOrphan"/> Thirteen Orphan?</label>
       </p>
     </div>

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('mahjongApp')
-  .directive('gameAction', [GameFactory, function (GameFactory) {
+  .directive('gameAction', ['GameFactory', function (GameFactory) {
     return {
       templateUrl: 'app/gameAction/gameAction.html',
       scope: {
@@ -39,6 +39,10 @@ angular.module('mahjongApp')
 
         updateFromPlayers();
         updateActors();
+
+        scope.isWinningAction = function() {
+          return _.indexOf([GameFactory.enums.EAT, GameFactory.enums.SELF_DRAW], scope.action.actionType) >= 0;
+        }
       }
     };
   }]);

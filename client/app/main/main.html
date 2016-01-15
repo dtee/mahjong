@@ -19,13 +19,21 @@
           <tr ng-repeat="game in main.games" data-ng-init="scores = game.getScore()">
             <td>{{game.data.created | date:'MM/dd h:mma'}}</td>
             <td data-ng-repeat="player in scores">
-                {{player.name}}: {{ player.score }}
+                <span ng-class="{won:player.won}">{{player.name}}: {{ player.score }}</span>
             </td>
             <td>
               <button type="button" class="close" ng-click="main.deleteGame(game)">&times;</button>
             </td>
           </tr>
         </tbody>
+      </table>
+
+      <br/>
+      <table class="table table-bordered table-striped col-xs-12">
+        <tr data-ng-repeat="(name, score) in main.summary" ng-class="{won:score > 0}">
+          <th>{{ name }}</th>
+          <td>{{ score }} ({{ score * 4 | currency }})</td>
+        </tr>
       </table>
     </div>
   </div>
