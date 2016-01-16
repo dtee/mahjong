@@ -24,6 +24,9 @@ module.exports = function(config) {
       'client/bower_components/angular-validation-match/dist/angular-validation-match.min.js',
       'client/bower_components/bootbox/bootbox.js',
       'client/bower_components/ngBootbox/dist/ngBootbox.js',
+      'client/bower_components/d3/d3.js',
+      'client/bower_components/c3/c3.js',
+      'client/bower_components/c3-angular/c3-angular.min.js',
       'client/bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'node_modules/socket.io-client/socket.io.js',

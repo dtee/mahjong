@@ -11,7 +11,10 @@ angular.module('mahjongApp', [
   'ui.router',
   'ui.bootstrap',
   'validation.match',
-  'ngBootbox'
+  'ngBootbox',
+  'ui.bootstrap',
+  'ui.bootstrap.tabs',
+  'gridshore.c3js.chart'
 ])
   .config(function($urlRouterProvider, $locationProvider) {
     $urlRouterProvider

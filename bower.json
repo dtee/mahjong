@@ -16,7 +16,9 @@
     "angular-socket-io": "~0.7.0",
     "angular-ui-router": "~0.2.15",
     "angular-validation-match": "~1.5.2",
-    "ngBootbox": "*"
+    "ngBootbox": "*",
+    "ui.bootstrap": "*",
+    "c3-angular": "~1.0.1"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.0"

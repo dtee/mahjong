@@ -72,24 +72,30 @@ class MainController {
     this.GameFactory.loadGames().then((games) => {
       this.games = games;
       this.socket.syncUpdates('games', games);
+      this.summary = this.GameFactory.getSummary(games);
 
-      var summary = {};
-      _.forEach(games, function(game) {
-        _.forEach(game.getScore(), function(scoreSummary) {
-          if (game.isDraw()) {
-            return;
+      var chartCols = {};
+      var row = {};
+      this.chart = _.map(games, function(game) {
+        _.forEach(game.getScore(), function(score) {
+          if (!row[score.name]) {
+            row[score.name] = 0;
           }
 
-          if (!summary[scoreSummary.name]) {
-            summary[scoreSummary.name] = 0;
-          }
+          row[score.name] += score.score;
 
-          summary[scoreSummary.name] += scoreSummary.score;
+          if (!chartCols[score.name]) {
+            chartCols[score.name] = {
+              id: score.name,
+              type: 'spline'
+            };
+          }
         });
+
+        return angular.copy(row);
       });
 
-      console.log('summary', summary);
-      this.summary = summary;
+      this.chartCols = _.values(chartCols);
     });
   }
 
