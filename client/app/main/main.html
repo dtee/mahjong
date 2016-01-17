@@ -19,8 +19,15 @@
         <input type="text" class="form-control" id="inputPassword3"
                placeholder="{{ seat }}" data-ng-model="main.game.data.seats[seat]">
       </div>
-      <div class="col-xs-6">
-        {{ main.game.getTotalScoreForPlayer(main.game.data.seats[seat]) }}
+      <div class="col-xs-3">
+        Score: {{ main.game.getTotalScoreForPlayer(main.game.data.seats[seat]) }}
+      </div>
+
+      <div class="col-xs-3">
+        <label>
+          <input type="radio" ng-model="main.game.data.dealer" value="{{ seat }}">
+          Dealer
+        </label>
       </div>
     </div>
 
@@ -46,13 +53,14 @@
     </div>
 
     <div>
+      <button class="btn" ng-click="main.newGame()">New</button>
       <button class="btn btn-success" ng-click="main.save(main.game)"
         data-ng-disabled="main.game.data.actions.length === 0">Save</button>
 
       <button class="btn btn-primary"
               ng-bootbox-custom-dialog
               ng-bootbox-options="main.customDialogOptions">
-        Add Item
+        Add Action
       </button>
     </div>
   </form>

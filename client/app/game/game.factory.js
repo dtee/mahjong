@@ -3,10 +3,10 @@
 (function () {
   var $http, _default = {
     seats: {
-      west: 'david',
       east: 'jeff',
-      north: 'julia',
-      south: 'amy'
+      south: 'amy',
+      west: 'david',
+      north: 'julia'
     },
     actions: []   //{actor: null, actionType: null, from: 'all', bonus: 0-2}
   };
@@ -153,6 +153,19 @@
 
     createAction (action) {
       return new GameAction(action || {}, this);
+    }
+
+    selectDealer(wind) {
+      var currentOrder = [
+        this.seats.east,
+        this.seats.south,
+        this.seats.west,
+        this.seats.north
+      ];
+
+      if (wind !== 'east') {
+
+      }
     }
   };
 

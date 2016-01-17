@@ -10,6 +10,7 @@ var ActionSchema =  new mongoose.Schema({
   bonus: {type: Number, default: 0}
 });
 
+// Game starts with east, south, west, north
 var GameSchema = new mongoose.Schema({
   seats: {
     west: {type: String},
@@ -17,6 +18,7 @@ var GameSchema = new mongoose.Schema({
     north: {type: String},
     south: {type: String}
   },
+  dealer: {type: String},
   actions: [ActionSchema],
   updated: { type: Date, default: Date.now },
   created: { type: Date, default: Date.now }

@@ -10,16 +10,15 @@ class MainController {
     this.games = [];
     this.summary = {};
     this.seats = [
-      'west',
       'east',
-      'north',
-      'south'
+      'south',
+      'west',
+      'north'
     ];
 
     this.GameFactory = GameFactory;
-    this.game = GameFactory.create();
-    this.action = this.game.createAction();
 
+    this.newGame();
     this.refreshGames();
 
     $scope.$on('$destroy', function() {
@@ -56,6 +55,15 @@ class MainController {
       this.refreshGames();
       this.game = this.GameFactory.create();
     });
+  }
+
+  newGame() {
+    this.game = this.GameFactory.create();
+    this.action = this.game.createAction();
+
+    if (this.games && this.games.length > 0) {
+      this.game.data.seats = _.last(this.games).data.seats;
+    }
   }
 
   editGame(game) {
@@ -96,6 +104,7 @@ class MainController {
       });
 
       this.chartCols = _.values(chartCols);
+      this.newGame();
     });
   }
 
